@@ -108,9 +108,11 @@ case $c in
         
 
     ;;
-	
-sleep 1
-done
+esac	
+sleep 1	
+done	
+
+
 
 tmux send-keys -t $session 'sponge timings paste' Enter 
 
