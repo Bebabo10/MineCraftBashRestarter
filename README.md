@@ -1,2 +1,5 @@
 # MineCraftBashRestarter
-Minecraft server restarter for bash needs tmux
+Minecraft server restarter for bash
+
+
+
