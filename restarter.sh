@@ -19,13 +19,15 @@ fi
 END=0
 echo "Countdown"
  
-for (( c=$START; c>$END ; c-- )) do
+
 
 tmux send-keys -t $session 'exit' Enter
 tmux send-keys -t $session 'exit' Enter
 tmux send-keys -t $session 'exit' Enter
 tmux send-keys -t $session 'exit' Enter
 tmux send-keys -t $session 'exit' Enter
+
+for (( c=$START; c>$END ; c-- )) do
 
 if [ "$SCOREBOARD" = "true" ]; then
 tmux send-keys -t $session 'scoreboard objectives add Restarting dummy Restarting' Enter
@@ -101,7 +103,10 @@ case $c in
 			if [ "$SCOREBOARD" = "true" ]; then
 				tmux send-keys -t $session '/scoreboard players set Reboot_in Restarting '$c'' Enter
 			fi
-		
+			if [ "$c" = "20" ]; then
+				tmux send-keys -t $session 'sponge timings paste' Enter 
+			
+			fi
 
 
 		fi
@@ -111,10 +116,6 @@ case $c in
 esac	
 sleep 1	
 done	
-
-
-
-tmux send-keys -t $session 'sponge timings paste' Enter 
 
 sleep 1
 tmux send-keys -t $session 'kickall Rebooting' Enter
