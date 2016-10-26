@@ -1,6 +1,11 @@
 # MineCraftBashRestarter
 Minecraft server restarter for bash
-requires tmux
+requires tmux and 'at'
+
+guides for at and tmux
+https://gist.github.com/MohamedAlaa/2961058
+http://www.computerhope.com/unix/uat.htm
+
 
 sh ./restarter <session name> h m s (broadcast/say) "optinal message"
 
