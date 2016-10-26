@@ -15,8 +15,8 @@ the time is up!"
 echo "Rebooting in:"
 
 #till i find a better way of doing this
-atrm {1..10000}
-
+atrm {1..10000} &
+disown
 for i in 5 4 3 2 1
 do
 echo "$i..."
