@@ -1,6 +1,6 @@
 #!/bin/bash
 minecraftLog="/opt/hermitpack/logs/fml-server-latest.log"
- 
+session=hermitpack 
  
 tail -fn0 $minecraftLog | \
 while read line ; do
@@ -8,12 +8,12 @@ test=$( echo "$line" | grep "ran the command: /sr*")
  
 if [ $? = 0 ]
 then
-tester=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $5}')
-tester1=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $10}')
-tester2=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $11}')
-tester3=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $12}')
+sname=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $5}')
+hour=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $10}')
+min=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $11}')
+sec=$( echo "$line" | grep "ran the command: /sr*" | awk '{print $12}')
  
-echo "$tester in $tester1 $tester2 $tester3"
+echo "$sname in $hour $min $sec"
 DR=0
  
 cat /opt/hermitpack/ops.json | grep "name" | awk '{print $2}' | cut -d \" -f 2 | \
@@ -34,7 +34,9 @@ fi
 if [ "$DR" -gt "0" ]; then
                
 echo "ran"
-               
+echo '/opt/restarter/restarter.sh $session $hour $min $sec'
+
+
 else
 echo "dint run"
  
