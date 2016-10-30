@@ -27,7 +27,7 @@ fi
                
 done
  
-if [ "$tester" = "Server" ]; then
+if [ "$sname" = "Server" ]; then
 DR=$((DR+1))
 fi
  
