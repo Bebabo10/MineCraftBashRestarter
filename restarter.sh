@@ -27,12 +27,12 @@ tmux send-keys -t $session 'exit' Enter
 tmux send-keys -t $session 'exit' Enter
 tmux send-keys -t $session 'exit' Enter
 
-for (( c=$START; c>$END ; c-- )) do
-
 if [ "$SCOREBOARD" = "true" ]; then
 tmux send-keys -t $session 'scoreboard objectives add Restarting dummy Restarting' Enter
 tmux send-keys -t $session 'scoreboard objectives setdisplay sidebar Restarting' Enter
 fi
+
+for (( c=$START; c>$END ; c-- )) do
 
 case $c in
 
