@@ -14,7 +14,7 @@ do
 echo '/opt/restarter/restarter.sh $session' | at -q $queue now + "$hourstillreboot" hours
 java $args -server -Xms"$RAM"G -Xmx"$RAM"G -jar $BASE nogui --mods ./sponge.jar
 jid="$(atq -q $queue | awk '{print $1}')"
-atrm -q $queue $jid
+at -q $queue -d $jid
 
 echo "If you want to completely stop the server process now, press Ctrl+C before
 the time is up!"
