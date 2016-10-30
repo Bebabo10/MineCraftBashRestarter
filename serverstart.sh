@@ -8,12 +8,14 @@ queue=h
 
 
 session="hermitpack"
-args="-XX:PermSize=256m -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:InitiatingHeapOccupancyPercent=10 -XX:G1MixedGCLiveThresholdPercent=50 -XX:+AggressiveOpts -XX:+AlwaysPreTouch -Dfml.doNotBackup=true"
+args="-XX:PermSize=256m -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:MaxGCPauseMillis=100 -XX:+DisableExplicitGC -XX:TargetSurvivorRatio=90 -XX:G1NewSizePercent=50 -XX:G1MaxNewSizePercent=80 -XX:InitiatingHeapOccupancyPercent=10 -XX:G1MixedGCLi$
 while true
 do
+tmux send-keys -t $session:1 'commandget.sh' Enter
 echo '/opt/restarter/restarter.sh $session' | at -q $queue now + "$hourstillreboot" hours
-java $args -server -Xms"$RAM"G -Xmx"$RAM"G -jar $BASE nogui --mods ./sponge.jar
+java $args -server -Xms"$RAM"G -Xmx"$RAM"G -jar $BASE nogui --mods ./sponge*.jar
 jid="$(atq -q $queue | awk '{print $1}')"
+tmux send-keys -t $session:1 C-c
 at -q $queue -d $jid
 
 echo "If you want to completely stop the server process now, press Ctrl+C before
@@ -27,4 +29,3 @@ sleep 1
 done
 echo "Rebooting now!"
 done
-
